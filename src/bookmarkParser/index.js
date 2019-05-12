@@ -1,12 +1,12 @@
 // @ts-check
-const Promise = require('bluebird');
+const promisify = require('util.promisify');
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
-const readdirAsync = Promise.promisify(fs.readdir);
-const execAsync = Promise.promisify(exec);
+const readdirAsync = promisify(fs.readdir);
+const execAsync = promisify(exec);
 
 function bookmarkParser(version = 'default', pluginContext) {
   let filePath;
@@ -36,6 +36,13 @@ function bookmarkParser(version = 'default', pluginContext) {
             shellCommandToReadData,
           });
           return execAsync(shellCommandToReadData)
+            .then(({ stdout }) => {
+              if (!stdout) throw new Error('No stdout after exec');
+              if (typeof stdout === 'string') {
+                return stdout;
+              }
+              throw new Error(`Bad stdout type ${typeof stdout}`);
+            })
             .then(JSON.parse)
             .then(content => ({ filename, content }));
         });
