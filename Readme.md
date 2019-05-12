@@ -16,22 +16,31 @@ Add the package to your plugins array in `./zazurc.js`.
 }
 ```
 
+## Variables
+
+```javascript
+{
+  "name": "linonetwo/zazu-firefox-bookmarks",
+  "variables": {
+    "profilePath": "/Users/xxx/Library/Application Support/Firefox/Profiles/gfedcba.123",
+    "limit": 5
+  }
+}
+```
+
+### `limit`
+
+Maximum number of returned items, by default is 15.
+
+### `profilePath`
+
 By default we look for your default profile located at:
 
 ```js
 `${os.homedir()}/Library/Application Support/Firefox/Profiles/abcdefg.default`
 ```
 
-To overwrite it, set the `profilePath` variable:
-
-```javascript
-{
-  "name": "linonetwo/zazu-firefox-bookmarks",
-  "variables": {
-    "profilePath": "/Users/xxx/Library/Application Support/Firefox/Profiles/gfedcba.123"
-  }
-}
-```
+To overwrite it, set the `profilePath` variable. You will probably never use it.
 
 ## Disclaimer
 

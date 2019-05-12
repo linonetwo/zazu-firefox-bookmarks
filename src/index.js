@@ -4,7 +4,7 @@ const traverse = require('traverse');
 const bookmarkParser = require('./bookmarkParser');
 
 function firefoxBookmarkSearch(pluginContext) {
-  return (query, { profilePath = undefined } = {}) => {
+  return (query, { profilePath = undefined, limit = 15 } = {}) => {
     if (query.length === 0) return Promise.resolve([]);
     pluginContext.console.log('warn', 'reading profile', {
       from: profilePath || 'default profile path',
@@ -29,7 +29,7 @@ function firefoxBookmarkSearch(pluginContext) {
       pluginContext.console.log('warn', 'get result [0]', {
         firstItem: resultItems[0],
       });
-      return resultItems;
+      return resultItems.slice(0, limit);
     });
   };
 }
