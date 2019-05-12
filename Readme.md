@@ -1,6 +1,6 @@
 # Zazu Firefox Bookmarks
 
-Firefox bookmark searcher for Zazu.
+Firefox bookmark searcher for [Zazu](https://github.com/tinytacoteam/zazu).
 
 ## Usage
 
