@@ -11,7 +11,7 @@
         "space": true,
         "args": "Required",
         "prefix": ",b",
-        "script": "./src/index.js",
+        "script": "src/index.js",
         "connections": [
           "Open"
         ]
