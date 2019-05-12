@@ -1,5 +1,6 @@
-const { readBookmarkBackup } = require('./src/bookmarkParser');
 const { search } = require('fast-fuzzy');
+const traverse = require('traverse');
+const { readBookmarkBackup } = require('./bookmarkParser');
 
 function firefoxBookmarkSearch(pluginContext) {
   return (query, { profilePath } = {}) => {
@@ -11,28 +12,20 @@ function firefoxBookmarkSearch(pluginContext) {
       pluginContext.console.log('warn', 'profile loaded', {
         filename,
       });
-      const bookmarks = traverse(content).reduce(function(accumulate, item) {
-        if (typeof item === 'object' && typeof item.uri === 'string') accumulate.push(item);
+      const bookmarks = traverse(content).reduce((accumulate, item) => {
+        if (item && typeof item === 'object' && typeof item.uri === 'string') accumulate.push(item);
         return accumulate;
       }, []);
-      if (isBookmark) {
-        const bookmark = {
-          id: query + item.url,
-          title: item.name,
-          subtitle: item.url,
-          value: item.url,
-        };
-        bookmarks.push(bookmark);
-      }
+
       const filteredBookmarks = search(query, bookmarks, { keySelector: item => item.title + item.uri });
       const resultItems = filteredBookmarks.map(({ title, uri, lastModified, iconuri, index }) => ({
         title,
         subtitle: uri,
         value: uri,
-        icon: iconuri,
+        icon: iconuri || 'fa-bookmark',
         id: `${lastModified}-${index}`,
       }));
-      resolve(resultItems);
+      return resultItems;
     });
   };
 }
