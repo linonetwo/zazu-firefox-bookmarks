@@ -36,17 +36,23 @@ function bookmarkParser(version = 'default', pluginContext) {
             shellCommandToReadData,
           });
           return execAsync(shellCommandToReadData)
-            .then(({ stdout, stderr }) => {
-              pluginContext.console.log('warn', 'result of mozlz4', {
-                stdout: stdout.substring(0, 100),
+            .then(result => {
+              // sometimes result is stdout, sometimes it's "stdout" that is stdout. Depends on nodejs runtime version
+              const { stdout, stderr } = result;
+              pluginContext.console.log('warn', 'result of parsing mozlz4', {
+                result: typeof result === 'string' && result.substring(0, 100),
+                stdout: typeof stdout === 'string' && stdout.substring(0, 100),
                 stderr,
               });
               if (stderr) throw new Error(stderr);
-              if (!stdout) throw new Error('No stdout after exec');
+              if (!result && !stdout) throw new Error('No result or stdout after exec');
               if (typeof stdout === 'string') {
                 return stdout;
               }
-              throw new Error(`Bad stdout type ${typeof stdout}`);
+              if (typeof result === 'string') {
+                return result;
+              }
+              throw new Error(`Bad stdout type ${typeof stdout} or bad result type ${typeof result}`);
             })
             .then(JSON.parse)
             .then(content => ({ filename, content }));
