@@ -37,6 +37,10 @@ function bookmarkParser(version = 'default', pluginContext) {
           });
           return execAsync(shellCommandToReadData)
             .then(({ stdout, stderr }) => {
+              pluginContext.console.log('warn', 'result of mozlz4', {
+                stdout: stdout.substring(0, 100),
+                stderr,
+              });
               if (stderr) throw new Error(stderr);
               if (!stdout) throw new Error('No stdout after exec');
               if (typeof stdout === 'string') {
