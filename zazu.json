@@ -10,7 +10,7 @@
         "type": "PrefixScript",
         "space": true,
         "args": "Required",
-        "prefix": ",b",
+        "prefix": "b",
         "script": "src/index.js",
         "connections": [
           "Open"
