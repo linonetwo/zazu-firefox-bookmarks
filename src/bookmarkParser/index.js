@@ -2,14 +2,11 @@ const Promise = require('bluebird');
 const os = require('os');
 const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
+const { exec } = require('child_process');
 
-const JSONLZ4Parser = require('./jsonlz4Parser');
+const execAsync = Promise.promisify(exec);
 
-function readFromJSONLZ4File(filePath) {
-  return fs.readFileAsync(filePath).then(JSONLZ4Parser);
-}
-
-function readBookmarkBackup(version = 'default') {
+function bookmarkParser(version = 'default') {
   let filePath;
   switch (os.type()) {
     case 'Windows_NT':
@@ -32,16 +29,12 @@ function readBookmarkBackup(version = 'default') {
         })
         .then(files => files.sort().reverse()[0])
         .then(filename => {
-          return fs
-            .readFileAsync(path.join(filePath, filename))
-            .then(JSONLZ4Parser)
+          filePath = path.join(filePath, filename);
+          return execAsync(`${__dirname}/mozlz4 ${filePath.replace(' ', '\\ ')}`)
             .then(JSON.parse)
             .then(content => ({ filename, content }));
         });
   }
 }
 
-module.exports = {
-  readBookmarkBackup,
-  readFromJSONLZ4File,
-};
+module.exports = bookmarkParser;

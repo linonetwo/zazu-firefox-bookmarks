@@ -1,6 +1,6 @@
 const { search } = require('fast-fuzzy');
 const traverse = require('traverse');
-const { readBookmarkBackup } = require('./bookmarkParser');
+const bookmarkParser = require('./bookmarkParser');
 
 function firefoxBookmarkSearch(pluginContext) {
   return (query, { profilePath } = {}) => {
@@ -8,7 +8,7 @@ function firefoxBookmarkSearch(pluginContext) {
     pluginContext.console.log('warn', 'reading profile', {
       from: profilePath || 'default profile path',
     });
-    return readBookmarkBackup(profilePath).then(({ filename, content }) => {
+    return bookmarkParser(profilePath).then(({ filename, content }) => {
       pluginContext.console.log('warn', 'profile loaded', {
         filename,
       });

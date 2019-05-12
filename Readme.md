@@ -37,4 +37,4 @@ To overwrite it, set the `profilePath` variable:
 
 Boilerplate is from [tinytacoteam/zazu-chrome-bookmarks](https://github.com/tinytacoteam/zazu-chrome-bookmarks).
 
-I've use the source code from [CCharlieLi/bookmark-parser](https://github.com/CCharlieLi/bookmark-parser) which is not actively maintained.
+I've use the source code from [CCharlieLi/bookmark-parser](https://github.com/CCharlieLi/bookmark-parser) which is not actively maintained, but instead use unstable C++ code (node-gyp sometimes failed), I use [jusw85/mozlz4 writen in rust](https://github.com/jusw85/mozlz4) binary to handle the dirty job.
