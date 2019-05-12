@@ -6,7 +6,7 @@ function firefoxBookmarkSearch(pluginContext) {
   return (query, { profilePath } = {}) => {
     if (query.length === 0) return Promise.resolve([]);
     pluginContext.console.log('warn', 'reading profile', {
-      profilePath,
+      from: profilePath || 'default profile path',
     });
     return readBookmarkBackup(profilePath).then(({ filename, content }) => {
       pluginContext.console.log('warn', 'profile loaded', {
