@@ -9,7 +9,7 @@ function firefoxBookmarkSearch(pluginContext) {
     pluginContext.console.log('warn', 'reading profile', {
       from: profilePath || 'default profile path',
     });
-    return bookmarkParser(profilePath).then(({ filename, content }) => {
+    return bookmarkParser(profilePath, pluginContext).then(({ filename, content }) => {
       pluginContext.console.log('warn', 'profile loaded', {
         filename,
       });
@@ -26,6 +26,9 @@ function firefoxBookmarkSearch(pluginContext) {
         icon: iconuri || 'fa-bookmark',
         id: `${lastModified}-${index}`,
       }));
+      pluginContext.console.log('warn', 'get result [0]', {
+        firstItem: resultItems[0],
+      });
       return resultItems;
     });
   };

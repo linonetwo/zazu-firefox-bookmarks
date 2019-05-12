@@ -8,7 +8,7 @@ const { exec } = require('child_process');
 const readdirAsync = Promise.promisify(fs.readdir);
 const execAsync = Promise.promisify(exec);
 
-function bookmarkParser(version = 'default') {
+function bookmarkParser(version = 'default', pluginContext) {
   let filePath;
   switch (os.type()) {
     case 'Windows_NT':
@@ -31,7 +31,11 @@ function bookmarkParser(version = 'default') {
         .then(files => files.sort().reverse()[0])
         .then(filename => {
           filePath = path.join(filePath, filename);
-          return execAsync(`${__dirname}/mozlz4 ${filePath.replace(' ', '\\ ')}`)
+          const shellCommandToReadData = `${__dirname}/mozlz4 ${filePath.replace(' ', '\\ ')}`;
+          pluginContext.console.log('warn', 'parsing mozlz4', {
+            shellCommandToReadData,
+          });
+          return execAsync(shellCommandToReadData)
             .then(JSON.parse)
             .then(content => ({ filename, content }));
         });
