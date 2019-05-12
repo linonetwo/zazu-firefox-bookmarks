@@ -37,8 +37,8 @@ function bookmarkParser(version = 'default', pluginContext) {
           });
           return execAsync(shellCommandToReadData)
             .then(({ stdout, stderr }) => {
-              if (!stdout && stderr) throw new Error(stderr);
-              if (!stdout && !stderr) throw new Error('No stdout after exec');
+              if (stderr) throw new Error(stderr);
+              if (!stdout) throw new Error('No stdout after exec');
               if (typeof stdout === 'string') {
                 return stdout;
               }
