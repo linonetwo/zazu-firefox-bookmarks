@@ -1,0 +1,28 @@
+{
+  "name": "Firefox Bookmarks",
+  "version": "1.0.0",
+  "description": "Firefox bookmark searcher for Zazu.",
+  "icon": "assets/firefox.png",
+  "blocks": {
+    "input": [
+      {
+        "id": "Firefox Bookmarks",
+        "type": "PrefixScript",
+        "space": true,
+        "args": "Required",
+        "prefix": ",b",
+        "script": "search.js",
+        "connections": [
+          "Open"
+        ]
+      }
+    ],
+    "output": [
+      {
+        "id": "Open",
+        "type": "OpenInBrowser",
+        "url": "{value}"
+      }
+    ]
+  }
+}
