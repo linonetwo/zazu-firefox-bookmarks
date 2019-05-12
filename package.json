@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Firefox bookmark searcher for Zazu.",
   "scripts": {
-    "test": "node ./assets/trySearch.js"
+    "test": "node ./tests/trySearch.js"
   },
   "keywords": [
     "alfred",
