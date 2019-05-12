@@ -1,9 +1,11 @@
+// @ts-check
 const Promise = require('bluebird');
 const os = require('os');
-const fs = Promise.promisifyAll(require('fs'));
+const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
+const readdirAsync = Promise.promisify(fs.readdir);
 const execAsync = Promise.promisify(exec);
 
 function bookmarkParser(version = 'default') {
@@ -20,12 +22,11 @@ function bookmarkParser(version = 'default') {
     case 'Darwin':
     default:
       filePath = `${os.homedir()}/Library/Application Support/Firefox/Profiles`;
-      return fs
-        .readdirAsync(filePath)
+      return readdirAsync(filePath)
         .then(dirs => {
           const userProfileDir = dirs.filter(each => each.split('.')[1] === version)[0];
           filePath = path.join(filePath, userProfileDir, 'bookmarkbackups');
-          return fs.readdirAsync(filePath);
+          return readdirAsync(filePath);
         })
         .then(files => files.sort().reverse()[0])
         .then(filename => {

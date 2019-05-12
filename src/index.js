@@ -1,9 +1,10 @@
+// @ts-check
 const { search } = require('fast-fuzzy');
 const traverse = require('traverse');
 const bookmarkParser = require('./bookmarkParser');
 
 function firefoxBookmarkSearch(pluginContext) {
-  return (query, { profilePath } = {}) => {
+  return (query, { profilePath = undefined } = {}) => {
     if (query.length === 0) return Promise.resolve([]);
     pluginContext.console.log('warn', 'reading profile', {
       from: profilePath || 'default profile path',
