@@ -4,12 +4,13 @@ const traverse = require('traverse');
 const bookmarkParser = require('./bookmarkParser');
 
 function firefoxBookmarkSearch(pluginContext) {
-  return (query, { profilePath = undefined, limit = 15 } = {}) => {
+  return (query, env = {}) => {
     if (query.length === 0) return Promise.resolve([]);
     pluginContext.console.log('warn', 'reading profile', {
-      from: profilePath || 'default profile path',
+      env,
+      from: env.profilePath || 'default profile path',
     });
-    return bookmarkParser(profilePath, pluginContext).then(({ filename, content }) => {
+    return bookmarkParser(env.profilePath, pluginContext).then(({ filename, content }) => {
       pluginContext.console.log('warn', 'profile loaded', {
         filename,
       });
@@ -27,9 +28,10 @@ function firefoxBookmarkSearch(pluginContext) {
         id: `${lastModified}-${index}`,
       }));
       pluginContext.console.log('warn', 'get result [0]', {
+        limit: env.limit || 15,
         firstItem: resultItems[0],
       });
-      return resultItems.slice(0, limit);
+      return resultItems.slice(0, env.limit || 15);
     });
   };
 }
