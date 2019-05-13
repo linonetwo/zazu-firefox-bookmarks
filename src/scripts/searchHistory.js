@@ -26,6 +26,7 @@ function firefoxHistoryBookmarkSearch(pluginContext) {
           .catch(error => {
             pluginContext.console.log('error', 'failed historySearcher', {
               error,
+              errorString: String(error),
             });
           }),
     );
