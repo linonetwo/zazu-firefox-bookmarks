@@ -1,6 +1,6 @@
 # Zazu Firefox Bookmarks
 
-Firefox bookmark searcher for [Zazu](https://github.com/tinytacoteam/zazu).
+Firefox bookmark and history searcher for [Zazu](https://github.com/tinytacoteam/zazu).
 
 ## Usage
 
@@ -23,6 +23,7 @@ Add the package to your plugins array in `./zazurc.js`.
   "name": "linonetwo/zazu-firefox-bookmarks",
   "variables": {
     "profilePath": "/Users/xxx/Library/Application Support/Firefox/Profiles/gfedcba.123",
+    "profileVersion": "123",
     "limit": 5
   }
 }
@@ -41,6 +42,10 @@ By default we look for your default profile located at:
 ```
 
 To overwrite it, set the `profilePath` variable. You will probably never use it.
+
+### `profileVersion`
+
+Fill in `profileVersion` if your profile version is not `default`.
 
 ## Disclaimer
 

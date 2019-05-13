@@ -1,10 +1,14 @@
 // @ts-check
-const { search } = require('fast-fuzzy');
-const traverse = require('traverse');
-const bookmarkParser = require('./bookmarkParser');
-const getProfilePath = require('./getProfilePath');
+const _ = require('lodash');
 
-function firefoxBookmarkSearch(pluginContext) {
+const bookmarkParser = require('./bookmarkParser');
+const bookmarkSearcher = require('./bookmarkParser/bookmarkSearcher');
+const historySearcher = require('./historySearcher');
+const getProfilePath = require('./utils/getProfilePath');
+
+function firefoxHistoryBookmarkSearch(pluginContext) {
+  const zipResults = _.flow([_.zip, _.flatten, _.compact]);
+
   return (query, env = {}) => {
     if (query.length === 0) return Promise.resolve([]);
     pluginContext.console.log('warn', 'reading profile', {
@@ -14,28 +18,19 @@ function firefoxBookmarkSearch(pluginContext) {
     });
     return (env.profilePath ? Promise.resolve(env.profilePath) : getProfilePath(env.profileVersion)).then(
       profileFolderPath =>
-        Promise.all([bookmarkParser(profileFolderPath, pluginContext)]).then(([bookmarkJSON]) => {
-          const bookmarks = traverse(bookmarkJSON).reduce((accumulate, item) => {
-            if (item && typeof item === 'object' && typeof item.uri === 'string') accumulate.push(item);
-            return accumulate;
-          }, []);
-
-          const filteredBookmarks = search(query, bookmarks, { keySelector: item => item.title + item.uri });
-          const resultItems = filteredBookmarks.map(({ title, uri, lastModified, iconuri, index }) => ({
-            title,
-            subtitle: uri,
-            value: uri,
-            icon: iconuri || 'fa-bookmark',
-            id: `${lastModified}-${index}`,
-          }));
+        Promise.all([
+          historySearcher(query, profileFolderPath, pluginContext),
+          bookmarkParser(profileFolderPath, pluginContext).then(bookmarkJSON => bookmarkSearcher(query, bookmarkJSON)),
+        ]).then(([historyList, bookmarkList]) => {
           pluginContext.console.log('warn', 'get result [0]', {
             limit: env.limit || 15,
-            firstItem: resultItems[0],
+            firstHistory: historyList[0],
+            firstBookmark: bookmarkList[0],
           });
-          return resultItems.slice(0, env.limit || 15);
+          return _.take(zipResults(historyList, bookmarkList), env.limit || 15);
         }),
     );
   };
 }
 
-module.exports = firefoxBookmarkSearch;
+module.exports = firefoxHistoryBookmarkSearch;
