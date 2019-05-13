@@ -5,7 +5,7 @@
   "scripts": {
     "test": "node ./tests/trySearch.js",
     "test:history": "node ./tests/tryHistory.js",
-    "postinstall": "install-app-deps"
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
     "alfred",
@@ -30,7 +30,6 @@
     "fast-fuzzy": "^1.8.5",
     "lodash": "^4.17.11",
     "sqlite": "^3.0.3",
-    "sqlite3": "^4.0.8",
     "traverse": "^0.6.6",
     "util.promisify": "^1.0.0"
   },
