@@ -1,7 +1,7 @@
 // @ts-check
 const _ = require('lodash');
 
-const bookmarkParser = require('../bookmark');
+const bookmarkParser = require('../bookmark/bookmarkParser');
 const bookmarkSearcher = require('../bookmark/bookmarkSearcher');
 const historySearcher = require('../history/historySearcher');
 const getProfilePath = require('../utils/getProfilePath');
