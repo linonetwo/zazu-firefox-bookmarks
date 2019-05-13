@@ -2,7 +2,7 @@
 const sqlite = require('sqlite');
 const path = require('path');
 
-const tryDecodeURI = require('./utils/tryDecodeURI')
+const tryDecodeURI = require('../utils/tryDecodeURI')
 
 function historySearcher(query, profileFolderPath, pluginContext) {
   const historyDbPath = path.join(profileFolderPath, 'places.sqlite');

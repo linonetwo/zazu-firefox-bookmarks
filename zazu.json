@@ -1,7 +1,7 @@
 {
-  "name": "Firefox Bookmarks",
-  "version": "1.1.0",
-  "description": "Firefox bookmark searcher for Zazu.",
+  "name": "zazu-firefox-bookmarks-history-search",
+  "version": "2.0.0",
+  "description": "Firefox bookmark and history searcher for Zazu.",
   "icon": "assets/firefox.png",
   "blocks": {
     "input": [
@@ -11,7 +11,25 @@
         "space": true,
         "args": "Required",
         "prefix": "b",
-        "script": "src/index.js",
+        "script": "src/scripts/searchBookmark.js",
+        "connections": ["Open"]
+      },
+      {
+        "id": "Firefox History",
+        "type": "PrefixScript",
+        "space": true,
+        "args": "Required",
+        "prefix": "h",
+        "script": "src/scripts/searchHistory.js",
+        "connections": ["Open"]
+      },
+      {
+        "id": "Firefox ",
+        "type": "PrefixScript",
+        "space": true,
+        "args": "Required",
+        "prefix": "f",
+        "script": "src/scripts/searchAll.js",
         "connections": ["Open"]
       }
     ],
