@@ -4,6 +4,7 @@
   "description": "Firefox bookmark searcher for Zazu.",
   "scripts": {
     "test": "node ./tests/trySearch.js",
+    "test:history": "node ./tests/tryHistory.js",
     "postinstall": "install-app-deps"
   },
   "keywords": [
