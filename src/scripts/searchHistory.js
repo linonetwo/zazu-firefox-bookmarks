@@ -14,13 +14,19 @@ function firefoxHistoryBookmarkSearch(pluginContext) {
     });
     return (env.profilePath ? Promise.resolve(env.profilePath) : getProfilePath(env.profileVersion)).then(
       profileFolderPath =>
-        historySearcher(query, profileFolderPath, pluginContext).then(historyList => {
-          pluginContext.console.log('warn', 'get result [0]', {
-            limit: env.limit || 15,
-            firstHistory: historyList[0],
-          });
-          return _.take(historyList, env.limit || 15);
-        }),
+        historySearcher(query, profileFolderPath, pluginContext)
+          .then(historyList => {
+            pluginContext.console.log('warn', 'get result [0]', {
+              limit: env.limit || 15,
+              firstHistory: historyList[0],
+            });
+            return _.take(historyList, env.limit || 15);
+          })
+          .catch(error => {
+            pluginContext.console.log('error', 'failed historySearcher', {
+              error,
+            });
+          }),
     );
   };
 }
