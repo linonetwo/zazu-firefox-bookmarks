@@ -14,14 +14,14 @@ function bookmarkParser(profileFolderPath, pluginContext) {
     const fileFullPath = path.join(bookmarkDirPath, latestFileName);
     const shellFriendlyPath = fileFullPath.replace(' ', '\\ ');
     const shellCommandToReadData = `${__dirname}/mozlz4 ${shellFriendlyPath}`;
-    pluginContext.console.log('warn', 'parsing mozlz4', {
+    pluginContext.console.log('info', 'parsing mozlz4', {
       shellCommandToReadData,
     });
     return execAsync(shellCommandToReadData)
       .then(result => {
         // sometimes result is stdout, sometimes it's "stdout" that is stdout. Depends on nodejs runtime version
         const { stdout, stderr } = result;
-        pluginContext.console.log('warn', 'result of parsing mozlz4', {
+        pluginContext.console.log('info', 'result of parsing mozlz4', {
           result: typeof result === 'string' && result.substring(0, 100),
           stdout: typeof stdout === 'string' && stdout.substring(0, 100),
           stderr,

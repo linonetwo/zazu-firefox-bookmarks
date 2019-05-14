@@ -10,7 +10,7 @@ const tryDecodeURI = require('../utils/tryDecodeURI');
 
 function historySearcher(query, profileFolderPath, limit, pluginContext) {
   const historyDbPath = path.join(profileFolderPath, 'places.sqlite');
-  pluginContext.console.log('warn', 'search history db', {
+  pluginContext.console.log('info', 'search history db', {
     historyDbPath,
   });
   return initSqlJs().then(SQL =>

@@ -12,7 +12,7 @@ function firefoxHistoryBookmarkSearch(pluginContext) {
   return (query, env = {}) => {
     if (query.length === 0) return Promise.resolve([]);
     const limit = env.limit || 15;
-    pluginContext.console.log('warn', 'reading profile', {
+    pluginContext.console.log('info', 'reading profile', {
       env,
       from: env.profilePath || 'default profile path',
       profileVersion: env.profileVersion || 'default profile version',
@@ -23,7 +23,7 @@ function firefoxHistoryBookmarkSearch(pluginContext) {
           historySearcher(query, profileFolderPath, limit, pluginContext),
           bookmarkParser(profileFolderPath, pluginContext).then(bookmarkJSON => bookmarkSearcher(query, bookmarkJSON)),
         ]).then(([historyList, bookmarkList]) => {
-          pluginContext.console.log('warn', 'get result [0]', {
+          pluginContext.console.log('info', 'get result [0]', {
             limit,
             firstHistory: historyList[0],
             firstBookmark: bookmarkList[0],
