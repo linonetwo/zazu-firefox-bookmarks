@@ -1,11 +1,9 @@
 {
   "name": "zazu-firefox-bookmarks",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Firefox bookmark searcher for Zazu.",
   "scripts": {
-    "test": "node ./tests/trySearch.js",
-    "test:history": "node ./tests/tryHistory.js",
-    "test:historyParser": "node ./tests/tryHistoryParser.js"
+    "test": "node ./tests/trySearch.js"
   },
   "keywords": [
     "alfred",
@@ -28,11 +26,12 @@
   "homepage": "https://github.com/linonetwo/zazu-firefox-bookmarks#readme",
   "dependencies": {
     "fast-fuzzy": "^1.8.5",
+    "firefox-profile-reader": "^0.2.0",
     "lodash": "^4.17.11",
     "traverse": "^0.6.6"
   },
   "devDependencies": {
-    "@types/node": "^12.0.0",
+    "@types/node": "^12.0.2",
     "babel-eslint": "10.0.1",
     "eslint": "5.16.0",
     "eslint-config-airbnb": "17.1.0",

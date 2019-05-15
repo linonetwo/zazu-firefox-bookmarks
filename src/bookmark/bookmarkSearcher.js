@@ -1,10 +1,12 @@
 // @ts-check
 const { search } = require('fast-fuzzy');
 const traverse = require('traverse');
+const { getBookmark } = require('firefox-profile-reader')
 
 const tryDecodeURI = require('../utils/tryDecodeURI');
 
-module.exports = function bookmarkSearcher(query, bookmarkJSON) {
+module.exports = async function bookmarkSearcher(query, version = 'default') {
+  const bookmarkJSON = await getBookmark(version)
   const bookmarks = traverse(bookmarkJSON).reduce((accumulate, item) => {
     if (item && typeof item === 'object' && typeof item.uri === 'string') accumulate.push(item);
     return accumulate;

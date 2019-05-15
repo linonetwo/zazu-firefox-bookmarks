@@ -6,24 +6,6 @@
   "blocks": {
     "input": [
       {
-        "id": "Firefox Bookmarks",
-        "type": "PrefixScript",
-        "space": true,
-        "args": "Required",
-        "prefix": "b",
-        "script": "src/scripts/searchBookmark.js",
-        "connections": ["Open"]
-      },
-      {
-        "id": "Firefox History",
-        "type": "PrefixScript",
-        "space": true,
-        "args": "Required",
-        "prefix": "h",
-        "script": "src/scripts/searchHistory.js",
-        "connections": ["Open"]
-      },
-      {
         "id": "Firefox ",
         "type": "PrefixScript",
         "space": true,

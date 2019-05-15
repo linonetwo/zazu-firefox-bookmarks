@@ -1,9 +1,9 @@
 // @ts-check
-const historyParser = require('./historyParser');
+const { getHistory } = require('firefox-profile-reader');
 const tryDecodeURI = require('../utils/tryDecodeURI');
 
-async function historyFormatter(query, profileFolderPath, limit, pluginContext) {
-  const result = await historyParser(profileFolderPath, query, limit, pluginContext);
+async function historyFormatter(query, limit, pluginContext, version = 'default') {
+  const result = await getHistory(query, limit, version);
   const resultList = result
     .split('\n')
     .map(line => line.split('|'))
