@@ -6,6 +6,10 @@ Firefox bookmark and history searcher for [Zazu](https://github.com/tinytacoteam
 
 Type for example `f youtube` then Zazu will list what you bookmarked in YouTube web site, and what you visited in this web site.
 
+By setting a variable you can search without prefix.
+
+![screenshot](screenshot.png)
+
 ## Installing
 
 Add the package to your plugins array in `./zazurc.js`.
