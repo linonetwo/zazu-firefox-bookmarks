@@ -4,6 +4,8 @@ Firefox bookmark and history searcher for [Zazu](https://github.com/tinytacoteam
 
 ## Usage
 
+Type for example `f youtube` then Zazu will list what you bookmarked in YouTube web site, and what you visited in this web site.
+
 ## Installing
 
 Add the package to your plugins array in `./zazurc.js`.
@@ -22,11 +24,16 @@ Add the package to your plugins array in `./zazurc.js`.
 {
   "name": "linonetwo/zazu-firefox-bookmarks",
   "variables": {
-    "profileVersion": "123",
+    "profileVersion": "123 Normally you don't need this",
+    "prefix": false,
     "limit": 5
   }
 }
 ```
+
+### `prefix`
+
+When set to false, you don't need `f` prefix to trigger bookmark and history search.
 
 ### `limit`
 
@@ -34,7 +41,7 @@ Maximum number of returned items, by default is 15.
 
 ### `profileVersion`
 
-Fill in `profileVersion` if your profile version is not `default`.
+Fill in `profileVersion` if your profile version is not `default`. Normally you don't need to use this variable.
 
 ## Disclaimer
 
