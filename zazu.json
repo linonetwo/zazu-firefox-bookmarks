@@ -6,7 +6,13 @@
   "blocks": {
     "input": [
       {
-        "id": "Firefox ",
+        "id": "FirefoxSearch",
+        "type": "RootScript",
+        "script": "calculator.js",
+        "connections": ["Copy"]
+      },
+      {
+        "id": "FirefoxSearchPrefix",
         "type": "PrefixScript",
         "space": true,
         "args": "Required",
