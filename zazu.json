@@ -8,8 +8,8 @@
       {
         "id": "FirefoxSearch",
         "type": "RootScript",
-        "script": "calculator.js",
-        "connections": ["Copy"]
+        "script": "src/scripts/index.js",
+        "connections": ["Open"]
       },
       {
         "id": "FirefoxSearchPrefix",
