@@ -1,7 +1,7 @@
 // @ts-check
 const _ = require('lodash');
 
-const historySearcher = require('../history/historySearcher');
+const historySearcher = require('../history/historyFormatter');
 const getProfilePath = require('../utils/getProfilePath');
 
 function firefoxHistoryBookmarkSearch(pluginContext) {

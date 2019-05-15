@@ -1,5 +1,5 @@
 // @ts-check
-const promisify = require('util.promisify');
+const { promisify } = require('util');
 const os = require('os');
 const fs = require('fs');
 const path = require('path');

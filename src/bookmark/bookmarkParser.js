@@ -1,6 +1,6 @@
 // @ts-check
 const path = require('path');
-const promisify = require('util.promisify');
+const { promisify } = require('util');
 const { exec } = require('child_process');
 const fs = require('fs');
 

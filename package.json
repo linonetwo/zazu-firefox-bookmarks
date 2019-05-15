@@ -4,7 +4,8 @@
   "description": "Firefox bookmark searcher for Zazu.",
   "scripts": {
     "test": "node ./tests/trySearch.js",
-    "test:history": "node ./tests/tryHistory.js"
+    "test:history": "node ./tests/tryHistory.js",
+    "test:historyParser": "node ./tests/tryHistoryParser.js"
   },
   "keywords": [
     "alfred",
@@ -28,9 +29,7 @@
   "dependencies": {
     "fast-fuzzy": "^1.8.5",
     "lodash": "^4.17.11",
-    "sql.js": "^1.0.0",
-    "traverse": "^0.6.6",
-    "util.promisify": "^1.0.0"
+    "traverse": "^0.6.6"
   },
   "devDependencies": {
     "@types/node": "^12.0.0",
