@@ -6,6 +6,7 @@ async function historyFormatter(query, limit, pluginContext, version = 'default'
   const result = await getHistory(query, limit, version);
   const resultList = result
     .split('\n')
+    .filter(line => line)
     .map(line => line.split('|'))
     .map(([url, date, frecency, ...titleParts]) => ({
       url,
