@@ -2,7 +2,7 @@
 const { getHistory } = require('firefox-profile-reader');
 const tryDecodeURI = require('../utils/tryDecodeURI');
 
-async function historyFormatter(query, limit, pluginContext, version = 'default') {
+async function historyFormatter(query, limit, version = 'default') {
   const result = await getHistory(query, limit, version);
   const resultList = result
     .split('\n')

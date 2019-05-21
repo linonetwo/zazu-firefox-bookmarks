@@ -2,7 +2,7 @@
 const _ = require('lodash');
 
 const bookmarkSearcher = require('../bookmark/bookmarkSearcher');
-const historyFormatter = require('../history/historyFormatter');
+const historySearcher = require('../history/historySearcher');
 
 module.exports = function firefoxHistoryBookmarkSearch(pluginContext) {
   const zipResults = _.flow([_.zip, _.flatten, _.compact]);
@@ -12,7 +12,7 @@ module.exports = function firefoxHistoryBookmarkSearch(pluginContext) {
     const limit = env.limit || 15;
 
     const [historyList, bookmarkList] = await Promise.all([
-      historyFormatter(query, limit, pluginContext, env.profileVersion),
+      historySearcher(query, limit, env.profileVersion),
       bookmarkSearcher(query, env.profileVersion),
     ]);
     pluginContext.console.log('info', 'get result [0]', {
